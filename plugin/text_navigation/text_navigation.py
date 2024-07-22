@@ -10,21 +10,13 @@ mod = Module()
 mod.setting(
     "text_navigation_max_line_search",
     type=int,
-    default=10,
+    default=2,  
     desc="The maximum number of rows that will be included in the search for the keywords above and below in <user direction>",
 )
 
-mod.list(
-    "navigation_action",
-    desc="Actions to perform, for instance move, select, cut, etc",
-)
-mod.list(
-    "before_or_after",
-    desc="Words to indicate if the cursor should be moved before or after a given reference point",
-)
-mod.list(
-    "navigation_target_name",
-    desc="Names for regular expressions for common things to navigate to, for instance a word with or without underscores",
+mod.list("navigation_action",desc="Actions to perform, e.g. move, select, cut...")
+mod.list("before_or_after",desc="Indicates if cursor should go before or after ref. pt.")
+mod.list("navigation_target_name",desc="Names for regular expressions for common things to navigate to, for instance a word with or without underscores",
 )
 
 ctx.lists["self.navigation_action"] = {
@@ -58,7 +50,7 @@ ctx.lists["self.navigation_target_name"] = navigation_target_names
 
 
 @mod.capture(
-    rule="<user.any_alphanumeric_key> | {user.navigation_target_name} | phrase <user.text>"
+    rule="<user.any_alphanumeric_key> | {user.navigation_target_name} | (abbreviate|abbreviation|brief) {user.abbreviation} | phrase <user.text> | variable {user.variable_list} | function {user.function_list} | <user.text>"
 )
 def navigation_target(m) -> re.Pattern:
     """A target to navigate to. Returns a regular expression."""
@@ -66,11 +58,69 @@ def navigation_target(m) -> re.Pattern:
         return re.compile(re.escape(m.any_alphanumeric_key), re.IGNORECASE)
     if hasattr(m, "navigation_target_name"):
         return re.compile(m.navigation_target_name)
-    return re.compile(re.escape(m.text), re.IGNORECASE)
+    if hasattr(m,"text"):
+        t = m.text
+    if hasattr(m,"abbreviation"):
+        t = m.abbreviation
+    if hasattr(m,"variable_list"):
+        t = m.variable_list
+    if hasattr(m,"function_list"):
+        t = m.function_list
+    # include homophones
+    word_list = re.findall(r"\w+",t)
+    word_list = set(word_list)
+    for w in word_list:
+        phone_list = actions.user.homophones_get(w)
+        if phone_list:
+            t = t.replace(w,"(" + '|'.join(phone_list) + ")")
+    return re.compile(t, re.IGNORECASE)
 
 
 @mod.action_class
 class Actions:
+    def navigation_by_string(
+        navigation_action: str,  # GO, EXTEND, SELECT, DELETE, CUT, COPY
+        direction: str,  # up, down, left, right
+        navigation_target_name: str,
+        before_or_after: str,  # BEFORE, AFTER, DEFAULT
+        search_string: str,
+        occurrence_number: int
+    ):
+        """Just enter a string to search for instead of a complicated capture"""
+        print("FUNCTION: navigation_by_string")
+        actions.user.navigation(
+            navigation_action,
+            direction,
+            navigation_target_name,
+            before_or_after,
+            re.compile(re.escape(search_string), re.IGNORECASE),
+            occurrence_number
+        )
+    def navigation_by_word(
+        navigation_action: str,  # GO, EXTEND, SELECT, DELETE, CUT, COPY
+        direction: str,  # up, down, left, right
+        navigation_target_name: str,
+        before_or_after: str,  # BEFORE, AFTER, DEFAULT
+        search_string: str,
+        occurrence_number: int
+    ):
+        """Search for a word including its homophones"""
+        print("FUNCTION: navigation_by_word")
+        phone_list = actions.user.homophones_get(search_string)
+        print(f"word: {search_string}, phones: {phone_list}")
+        if phone_list == None:
+            regex = re.compile(re.escape(search_string), re.IGNORECASE)
+        else:
+            regex = re.compile('|'.join(map(re.escape, phone_list)), re.IGNORECASE)
+        print(f"regex: {regex}")
+        actions.user.navigation(
+            navigation_action,
+            direction,
+            navigation_target_name,
+            before_or_after,
+            regex,
+            occurrence_number
+        )
     def navigation(
         navigation_action: str,  # GO, EXTEND, SELECT, DELETE, CUT, COPY
         direction: str,  # up, down, left, right
@@ -80,7 +130,9 @@ class Actions:
         occurrence_number: int,
     ):
         """Navigate in `direction` to the occurrence_number-th time that `regex` occurs, then execute `navigation_action` at the given `before_or_after` position."""
+        
         direction = direction.upper()
+#        print(f"direction: {direction}")
         navigation_target_name = re.compile(
             navigation_target_names["word"]
             if (navigation_target_name == "DEFAULT")
@@ -116,6 +168,7 @@ class Actions:
 
 
 def get_text_left():
+    # get text on the same line to the left of cursor
     actions.edit.extend_line_start()
     text = actions.edit.selected_text()
     actions.edit.right()
@@ -123,6 +176,7 @@ def get_text_left():
 
 
 def get_text_right():
+    # get text on the same line to the right of cursor
     actions.edit.extend_line_end()
     text = actions.edit.selected_text()
     actions.edit.left()
@@ -130,8 +184,9 @@ def get_text_right():
 
 
 def get_text_up():
-    actions.edit.up()
-    actions.edit.line_end()
+    # get text on the same line to the left and on previous lines
+    actions.edit.extend_line_start()
+    actions.edit.extend_left()
     for j in range(0, settings.get("user.text_navigation_max_line_search")):
         actions.edit.extend_up()
     actions.edit.extend_line_start()
@@ -141,8 +196,9 @@ def get_text_up():
 
 
 def get_text_down():
-    actions.edit.down()
-    actions.edit.line_start()
+    # get text on the same line to the right and on subsequent lines
+    actions.edit.extend_line_end()
+    actions.edit.extend_right()
     for j in range(0, settings.get("user.text_navigation_max_line_search")):
         actions.edit.extend_down()
     actions.edit.extend_line_end()
@@ -192,21 +248,28 @@ def navigate_left(
     occurrence_number,
     direction,
 ):
+
+    # record information about current selection so that we can 
+    # reselect later if needed
     current_selection_length = get_current_selection_size()
     if current_selection_length > 0:
         actions.edit.right()
+    # get text to search within,1
     text = get_text_left() if direction == "LEFT" else get_text_up()
     # only search in the text that was not selected
     subtext = (
         text if current_selection_length <= 0 else text[:-current_selection_length]
     )
+    # look for a match. return value is a regex march object
     match = match_backwards(regex, occurrence_number, subtext)
     if match is None:
         # put back the old selection, if the search failed
         extend_left(current_selection_length)
         return
+    # get indices of start and end of matching sub string
     start = match.start()
     end = match.end()
+    # With these indices we can now pull out the target string from the text we selected to search within
     handle_navigation_action(
         navigation_action,
         navigation_target_name,
@@ -240,6 +303,7 @@ def navigate_right(
         return
     start = current_selection_length + match.start()
     end = current_selection_length + match.end()
+    # Now that we have the start and and
     handle_navigation_action(
         navigation_action,
         navigation_target_name,
@@ -260,6 +324,11 @@ def handle_navigation_action(
     start,
     end,
 ):
+    # Call the appropriate function based on the navigation action_class
+    
+    # I suspect that errors are the result of this starting too quickly,
+    # so I'm gonna force a short sleep here
+    actions.sleep(0.2)
     length = len(text)
     if navigation_action == "GO":
         handle_move(direction, before_or_after, start, end, length)

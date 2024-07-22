@@ -125,7 +125,8 @@ modifier_keys = {
     # If you find 'alt' is often misrecognized, try using 'alter'.
     "alt": "alt",  #'alter': 'alt',
     "control": "ctrl",  #'troll':   'ctrl',
-    "shift": "shift",  #'sky':     'shift',
+    "shift": "shift",  
+    'sky': 'shift',
     "super": "super",
 }
 if app.platform == "mac":
@@ -173,6 +174,9 @@ symbol_key_words = {
     "dot": ".",
     "point": ".",
     "quote": "'",
+    "foot": "'",
+    "feet": "'",
+    "inch": '"',
     "question": "?",
     "apostrophe": "'",
     "L square": "[",
@@ -198,6 +202,8 @@ symbol_key_words = {
     "down score": "_",
     "underscore": "_",
     "paren": "(",
+    "parent": "(",
+    "right parent": ")",
     "brace": "{",
     "left brace": "{",
     "curly bracket": "{",
@@ -215,8 +221,10 @@ symbol_key_words = {
     "greater than": ">",
     "star": "*",
     "hash": "#",
+    "number sign": "#",
     "percent": "%",
-    "caret": "^",
+    "caret sign": "^",
+    "caret symbol": "^",
     "amper": "&",
     "pipe": "|",
     "dub quote": '"',
@@ -255,7 +263,10 @@ alternate_keys = {
     "delete": "backspace",
     #'junk': 'backspace',
     "forward delete": "delete",
+    "flick": "delete",
     "page up": "pageup",
+    "pay up": "pageup",
+    "pay down": "pagedown",
     "page down": "pagedown",
 }
 # mac apparently doesn't have the menu key.
@@ -267,6 +278,8 @@ special_keys = {k: k for k in simple_keys}
 special_keys.update(alternate_keys)
 ctx.lists["self.special_key"] = special_keys
 ctx.lists["self.function_key"] = {
+    f"Funk {name}": f"f{i}" for i, name in enumerate(f_digits, start=1)
+} | {
     f"F {name}": f"f{i}" for i, name in enumerate(f_digits, start=1)
 }
 
