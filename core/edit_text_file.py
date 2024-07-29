@@ -48,10 +48,9 @@ class WinActions:
         # If there's no applications registered that can open the given type
         # of file, 'edit' will fail, but 'open' always gives the user a
         # choice between applications.
-        try:
-            os.startfile(path, "edit")
-        except OSError:
-            os.startfile(path, "open")
+        # Update: Windows 11 doesn't provide an easy way to change the program opened with
+        # the "edit" flag, so reverting to just using the "open" flag always
+        os.startfile(path, "open")
 
 
 @macctx.action_class("self")
