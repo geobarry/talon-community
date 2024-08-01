@@ -8,40 +8,44 @@ C:\Users\Administrator\Documents,docks
 C:\Users\Administrator\Downloads,downloads
 C:\Users\Administrator\Music,music
 C:\Users\Administrator\Videos,videos
-C:\Users\Administrator\AppData\Roaming\talon,talon home
-C:\Users\Administrator\AppData\Roaming\talon\user,talon user
+%appdata%\talon,talon home
+%appdata%\talon\user,talon user
 C:\Program Files\Talon\Lib\site-packages\talon,talon API
 C:\Sync\mems,memos
 C:\temp,temp
-C:\CaGIS Board Dropbox\cantaloupe bob,cantaloupe
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching,teaching
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Service,service
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Admin,admin
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\World Regional Geography,regional
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\World Regional Geography,world regional
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\Internet Mapping and GIS,internet mapping
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\Quantitative Methods,quantitative
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\Cartography and Visualization,cartography
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\PSM Seminar,seminar
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\World Regional Geography,world regional
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\GIS Programming,programming
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\weather and climate,weather
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\weather and climate,weather and climate
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Research,research
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Research\Projects,projects
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Research\Projects\polyline difference metrics\Hausdorff\git_code,Hausdorff code
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Research\Conferences,conferences
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Research\Conferences\American Association of Geographers\2024 Honolulu,Honolulu
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Research\Grants\USGS\Community for Data Integration, community grant
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Technology,technology
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Pictures,Pictures
-C:\CaGIS Board Dropbox\CaGIS,CaGIS
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\personal,personal
+%dropbox%\cantaloupe bob,cantaloupe
+%dropbox%\cantaloupe bob\Barry\Teaching,teaching
+%dropbox%\cantaloupe bob\Barry\Service,service
+%dropbox%\cantaloupe bob\Barry\Admin,admin
+%dropbox%\cantaloupe bob\Barry\Teaching\World Regional Geography,regional
+%dropbox%\cantaloupe bob\Barry\Teaching\World Regional Geography,world regional
+%dropbox%\cantaloupe bob\Barry\Teaching\Internet Mapping and GIS,internet mapping
+%dropbox%\cantaloupe bob\Barry\Teaching\Quantitative Methods,quantitative
+%dropbox%\cantaloupe bob\Barry\Teaching\Cartography and Visualization,cartography
+%dropbox%\cantaloupe bob\Barry\Teaching\PSM Seminar,seminar
+%dropbox%\cantaloupe bob\Barry\Teaching\World Regional Geography,world regional
+%dropbox%\cantaloupe bob\Barry\Teaching\GIS Programming,programming
+%dropbox%\cantaloupe bob\Barry\Teaching\weather and climate,weather
+%dropbox%\cantaloupe bob\Barry\Teaching\weather and climate,weather and climate
+%dropbox%\cantaloupe bob\Barry\Research,research
+%dropbox%\cantaloupe bob\Barry\Research\Projects,projects
+%dropbox%\cantaloupe bob\Barry\Research\Projects\polyline difference metrics\Hausdorff\git_code,Hausdorff code
+%dropbox%\cantaloupe bob\Barry\Research\Conferences,conferences
+%dropbox%\cantaloupe bob\Barry\Research\Conferences\American Association of Geographers\2024 Honolulu,Honolulu
+%dropbox%\cantaloupe bob\Barry\Research\Grants\USGS\Community for Data Integration, community grant
+%dropbox%\cantaloupe bob\Barry\Technology,technology
+%dropbox%\cantaloupe bob\Barry\Pictures,Pictures
+%dropbox%\CaGIS,CaGIS
+%dropbox%\cantaloupe bob\Barry\personal,personal
 C:\temp\_____S\202430-GEO-4910-001\Students\JaneDoe,programming demos
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\travel\Hawaii 2024,Hawaii
+%dropbox%\cantaloupe bob\Barry\travel\Hawaii 2024,Hawaii
 C:\temp\demos,demos
-C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Data_DB,data
+%dropbox%\cantaloupe bob\Barry\Data_DB,data
 %appdata%\talon\user\community,talon community
 %appdata%\talon\user\kronenfeld,talon Kronenfeld
 %appdata%\talon\user\mousefree,mouse free
 %appdata%\talon\user\mousefree\eagle_talon,eagle talon
+%dropbox%,dropbox
+%dropbox%\cantaloupe bob\barry,barry
+%dropbox%\cantaloupe bob\Barry\Teaching\Cartography and Visualization\Labs\Lab 1 Reference Map\videos\2024,reference map videos
+%dropbox%\cantaloupe bob\Barry\Teaching\Cartography and Visualization\Labs\Lab 1 Reference Map\,reference map lab
