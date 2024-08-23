@@ -7,7 +7,7 @@ C:\Users\Administrator\Documents,documents
 C:\Users\Administrator\Documents,docks
 C:\Users\Administrator\Downloads,downloads
 C:\Users\Administrator\Music,music
-C:\Users\Administrator\Videos,videos
+videos,videos
 %appdata%\talon,talon home
 %appdata%\talon\user,talon user
 C:\Program Files\Talon\Lib\site-packages\talon,talon API
@@ -47,3 +47,4 @@ C:\temp,temp
 %dropbox%\cantaloupe bob\barry,barry
 %dropbox%\cantaloupe bob\Barry\Teaching\Cartography and Visualization\Labs\Lab 1 Reference Map\videos\2024,reference map videos
 C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\Cartography and Visualization\Labs\Lab 1 Reference Map\_____S\202490-GEO-4810-001\Students\JaneDoe\labs\myanmar reference map,reference map lab
+D:\,thumb drive
