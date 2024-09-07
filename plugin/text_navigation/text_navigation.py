@@ -58,22 +58,23 @@ def navigation_target(m) -> re.Pattern:
         return re.compile(re.escape(m.any_alphanumeric_key), re.IGNORECASE)
     if hasattr(m, "navigation_target_name"):
         return re.compile(m.navigation_target_name)
-    if hasattr(m,"text"):
-        t = m.text
     if hasattr(m,"abbreviation"):
         t = m.abbreviation
     if hasattr(m,"variable_list"):
         t = m.variable_list
     if hasattr(m,"function_list"):
         t = m.function_list
-    # include homophones
-    word_list = re.findall(r"\w+",t)
-    word_list = set(word_list)
-    for w in word_list:
-        phone_list = actions.user.homophones_get(w)
-        if phone_list:
-            t = t.replace(w,"(" + '|'.join(phone_list) + ")")
-    return re.compile(t, re.IGNORECASE)
+    if hasattr(m,"text"):
+        t = m.text
+        # include homophones
+        word_list = re.findall(r"\w+",t)
+        word_list = set(word_list)
+        for w in word_list:
+            phone_list = actions.user.homophones_get(w)
+            if phone_list:
+                t = t.replace(w,"(" + '|'.join(phone_list) + ")")
+    r = re.compile(t, re.IGNORECASE)
+    return r
 
 
 @mod.action_class
