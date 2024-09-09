@@ -73,6 +73,8 @@ def navigation_target(m) -> re.Pattern:
             phone_list = actions.user.homophones_get(w)
             if phone_list:
                 t = t.replace(w,"(" + '|'.join(phone_list) + ")")
+        # accommodate formatting by allowing non-letter characters between words
+        t = t.replace(" ","[^a-z|A-Z]*")
     r = re.compile(t, re.IGNORECASE)
     return r
 
