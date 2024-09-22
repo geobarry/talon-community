@@ -50,10 +50,11 @@ ctx.lists["self.navigation_target_name"] = navigation_target_names
 
 
 @mod.capture(
-    rule="<user.any_alphanumeric_key> | {user.navigation_target_name} | (abbreviate|abbreviation|brief) {user.abbreviation} | phrase <user.text> | variable {user.variable_list} | function {user.function_list} | <user.text>"
+    rule="<user.any_alphanumeric_key> | {user.navigation_target_name} | (abbreviate|abbreviation|brief) {user.abbreviation} | phrase <user.text> | variable {user.variable_list} | function {user.function_list} | word <user.word> | number <user.real_number> | <user.text>"
 )
 def navigation_target(m) -> re.Pattern:
     """A target to navigate to. Returns a regular expression."""
+    include_homophones = False
     if hasattr(m, "any_alphanumeric_key"):
         return re.compile(re.escape(m.any_alphanumeric_key), re.IGNORECASE)
     if hasattr(m, "navigation_target_name"):
@@ -64,8 +65,20 @@ def navigation_target(m) -> re.Pattern:
         t = m.variable_list
     if hasattr(m,"function_list"):
         t = m.function_list
+    if hasattr(m,"real_number"):
+        x = int(m.real_number)
+        y = float(m.real_number)
+        if x == y:
+            t = str(x)
+        else:
+            t = str(y)
+    if hasattr(m,"word"):
+        t = m.word
+        include_homophones = True
     if hasattr(m,"text"):
         t = m.text
+        include_homophones = True
+    if include_homophones:
         # include homophones
         word_list = re.findall(r"\w+",t)
         word_list = set(word_list)
