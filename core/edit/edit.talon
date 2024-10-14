@@ -21,8 +21,8 @@ scroll down: edit.page_down()
 # go word left, go 2 words right
 go <user.navigation_step>+: user.perform_navigation_steps(navigation_step_list)
 
-go line start | head: edit.line_start()
-go line end | tail: edit.line_end()
+go line start: edit.line_start()
+go line end: edit.line_end()
 
 go way left:
     edit.line_start()
@@ -57,16 +57,16 @@ indent [more]: edit.indent_more()
 (indent less | out dent): edit.indent_less()
 
 # Delete
-clear left: edit.delete()
-clear right: user.delete_right()
-
-clear up:
-    edit.extend_line_up()
-    edit.delete()
-
-clear down:
-    edit.extend_line_down()
-    edit.delete()
+#clear left: edit.delete()
+#clear right: user.delete_right()
+#
+#clear up:
+#    edit.extend_line_up()
+#    edit.delete()
+#
+#clear down:
+#    edit.extend_line_down()
+#    edit.delete()
 
 clear word left:
     edit.extend_word_left()
