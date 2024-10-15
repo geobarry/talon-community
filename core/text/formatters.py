@@ -275,9 +275,9 @@ reformatter_names = {
 }
 word_formatter_names = {
     "word": "ALL_LOWERCASE",
-    "trot": "TRAILING_SPACE,ALL_LOWERCASE",
+#    "trot": "TRAILING_SPACE,ALL_LOWERCASE",
     "proud": "CAPITALIZE_FIRST_WORD",
-    "leap": "TRAILING_SPACE,CAPITALIZE_FIRST_WORD",
+#    "leap": "TRAILING_SPACE,CAPITALIZE_FIRST_WORD",
 }
 
 

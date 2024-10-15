@@ -265,8 +265,8 @@ alternate_keys = {
     "forward delete": "delete",
     "flick": "delete",
     "page up": "pageup",
-    "pay up": "pageup",
-    "pay down": "pagedown",
+#    "pay up": "pageup",
+#    "pay down": "pagedown",
     "page down": "pagedown",
 }
 # mac apparently doesn't have the menu key.
