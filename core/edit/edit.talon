@@ -19,23 +19,23 @@ scroll down: edit.page_down()
 
 # go left, go left left down, go 5 left 2 down
 # go word left, go 2 words right
-go <user.navigation_step>+: user.perform_navigation_steps(navigation_step_list)
+(go|move) <user.navigation_step>+: user.perform_navigation_steps(navigation_step_list)
 
-go line start: edit.line_start()
-go line end: edit.line_end()
+(go|move) line start: edit.line_start()
+(go|move) line end: edit.line_end()
 
-go way left:
+(go|move) way left:
     edit.line_start()
     edit.line_start()
-go way right: edit.line_end()
-go way up: edit.file_start()
-go way down: edit.file_end()
+(go|move) way right: edit.line_end()
+(go|move) way up: edit.file_start()
+(go|move) way down: edit.file_end()
 
-go top: edit.file_start()
-go bottom: edit.file_end()
+(go|move) top: edit.file_start()
+(go|move) bottom: edit.file_end()
 
-go page up: edit.page_up()
-go page down: edit.page_down()
+(go|move) page up: edit.page_up()
+(go|move) page down: edit.page_down()
 
 # Selecting
 
