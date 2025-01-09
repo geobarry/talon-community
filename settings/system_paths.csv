@@ -10,6 +10,9 @@ C:\Users\Administrator\Music,music
 videos,videos
 %appdata%\talon,talon home
 %appdata%\talon\user,talon user
+%appdata%\talon\user\community,talon community
+%appdata%\talon\user\kronenfeld,talon Kronenfeld
+%appdata%\talon\user\mousefree,mouse free
 C:\Program Files\Talon\Lib\site-packages\talon,talon API
 C:\Sync\mems,memos
 C:\temp,temp
@@ -46,9 +49,6 @@ C:\temp,temp
 %dropbox%\cantaloupe bob\Barry\personal,personal
 %dropbox%\cantaloupe bob\Barry\personal\Travel\2024 New Mexico,New Mexico
 %dropbox%\cantaloupe bob\Barry\Data_DB,data
-%appdata%\talon\user\community,talon community
-%appdata%\talon\user\kronenfeld,talon Kronenfeld
-%appdata%\talon\user\mousefree,mouse free
 %dropbox%\cantaloupe bob\Barry\Research\Projects\Mouse Free,mouse free videos
 %dropbox%,dropbox
 %dropbox%\cantaloupe bob\barry,barry
