@@ -21,8 +21,8 @@ scroll down: edit.page_down()
 # go word left, go 2 words right
 (go|move) <user.navigation_step>+: user.perform_navigation_steps(navigation_step_list)
 
-(go|move) line start: edit.line_start()
-(go|move) line end: edit.line_end()
+#(go|move) line start: edit.line_start()
+#(go|move) line end: edit.line_end()
 
 (go|move) way left:
     edit.line_start()
@@ -31,11 +31,11 @@ scroll down: edit.page_down()
 (go|move) way up: edit.file_start()
 (go|move) way down: edit.file_end()
 
-(go|move) top: edit.file_start()
-(go|move) bottom: edit.file_end()
+#(go|move) top: edit.file_start()
+#(go|move) bottom: edit.file_end()
 
-(go|move) page up: edit.page_up()
-(go|move) page down: edit.page_down()
+#(go|move) page up: edit.page_up()
+#(go|move) page down: edit.page_down()
 
 # Selecting
 
@@ -146,7 +146,7 @@ new line above: edit.line_insert_up()
 new line below | slap: edit.line_insert_down()
 
 # Insert padding with optional symbols
-(pad | padding): user.insert_between(" ", " ")
+#(pad | padding): user.insert_between(" ", " ")
 (pad | padding) <user.symbol_key>+:
     insert(" ")
     user.insert_many(symbol_key_list)
