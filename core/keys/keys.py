@@ -83,10 +83,16 @@ def function_key(m) -> str:
     return m.function_key
 
 
-@mod.capture(rule="( <self.letter> | <self.number_key> | <self.symbol_key> )")
+@mod.capture(rule="( <self.letter> | <self.number_key> | <self.symbol_key> | space | tab)")
 def any_alphanumeric_key(m) -> str:
     "any alphanumeric key"
-    return str(m)
+    print(f'm: {m} {hasattr(m,"space")} {m == "space"} {str(m) == "space"}')
+    if str(m) == "space":
+        return ' '
+    elif str(m) == "tab":
+        return "\t"
+    else:
+        return str(m)
 
 
 @mod.capture(
