@@ -1,0 +1,59 @@
+list: user.system_paths
+hostname: Barry_yoga_lap
+-
+user: C:\Users\Administrator
+profile: C:\Users\Administrator
+desktop: C:\Users\Administrator\Desktop
+desk: C:\Users\Administrator\Desktop
+documents: C:\Users\Administrator\Documents
+docks: C:\Users\Administrator\Documents
+downloads: C:\Users\Administrator\Downloads
+music: C:\Users\Administrator\Music
+videos
+talon home: %appdata%\talon
+talon user: %appdata%\talon\user
+talon community: %appdata%\talon\user\community
+talon Kronenfeld: %appdata%\talon\user\kronenfeld
+mouse free: %appdata%\talon\user\mousefree
+talon API: C:\Program Files\Talon\Lib\site-packages\talon
+memos: C:\Sync\mems
+temp: C:\temp
+cantaloupe: %dropbox%\cantaloupe bob
+teaching: %dropbox%\cantaloupe bob\Barry\Teaching
+service: %dropbox%\cantaloupe bob\Barry\Service
+admin: %dropbox%\cantaloupe bob\Barry\Admin
+regional: %dropbox%\cantaloupe bob\Barry\Teaching\World Regional Geography
+world regional: %dropbox%\cantaloupe bob\Barry\Teaching\World Regional Geography
+internet mapping: %dropbox%\cantaloupe bob\Barry\Teaching\Internet Mapping and GIS
+quantitative: %dropbox%\cantaloupe bob\Barry\Teaching\Quantitative Methods
+cartography: %dropbox%\cantaloupe bob\Barry\Teaching\Cartography and Visualization
+seminar: %dropbox%\cantaloupe bob\Barry\Teaching\PSM Seminar
+programming: %dropbox%\cantaloupe bob\Barry\Teaching\GIS Programming
+geodatabases: %dropbox%\cantaloupe bob\Barry\Teaching\Geodatabases
+weather: %dropbox%\cantaloupe bob\Barry\Teaching\weather and climate
+weather and climate: %dropbox%\cantaloupe bob\Barry\Teaching\weather and climate
+modeling: %dropbox%\cantaloupe bob\Barry\Teaching\Modelling the Earth
+Asia: %dropbox%\cantaloupe bob\Barry\Teaching\Geography of Asia
+research: %dropbox%\cantaloupe bob\Barry\Research
+projects: %dropbox%\cantaloupe bob\Barry\Research\Projects
+Hausdorff paper: %dropbox%\cantaloupe bob\Barry\Research\Projects\polyline difference metrics\Hausdorff
+Hausdorff code: %dropbox%\cantaloupe bob\Barry\Research\Projects\polyline difference metrics\Hausdorff\git_code
+conferences: %dropbox%\cantaloupe bob\Barry\Research\Conferences
+Honolulu: %dropbox%\cantaloupe bob\Barry\Research\Conferences\American Association of Geographers\2024 Honolulu
+Detroit: %dropbox%\cantaloupe bob\Barry\Research\Conferences\American Association of Geographers\2025 Detroit AAG
+Vancouver: %dropbox%\cantaloupe bob\Barry\Research\Conferences\International Cartographic Conference\2025 Vancouver
+community grant: %dropbox%\cantaloupe bob\Barry\Research\Grants\USGS\Community for Data Integration
+technology: %dropbox%\cantaloupe bob\Barry\Technology
+Pictures: %dropbox%\cantaloupe bob\Barry\Pictures
+website: %dropbox%\cantaloupe bob\Barry\website
+travel: %dropbox%\cantaloupe bob\Barry\travel
+CaGIS: %dropbox%\CaGIS
+personal: %dropbox%\cantaloupe bob\Barry\personal
+New Mexico: %dropbox%\cantaloupe bob\Barry\personal\Travel\2024 New Mexico
+data: %dropbox%\cantaloupe bob\Barry\Data_DB
+mouse free videos: %dropbox%\cantaloupe bob\Barry\Research\Projects\Mouse Free
+dropbox: %dropbox%
+barry: %dropbox%\cantaloupe bob\barry
+reference map videos: %dropbox%\cantaloupe bob\Barry\Teaching\Cartography and Visualization\Labs\Lab 1 Reference Map\videos\2024
+reference map lab: C:\CaGIS Board Dropbox\cantaloupe bob\Barry\Teaching\Cartography and Visualization\Labs\Lab 1 Reference Map\_____S\202490-GEO-4810-001\Students\JaneDoe\labs\myanmar reference map
+thumb drive: D:\
