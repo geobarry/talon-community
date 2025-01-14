@@ -16,5 +16,6 @@ insert: insert
 wipe: backspace
 delete: backspace
 forward delete: delete
+flick: delete
 menu key: menu
 print screen: printscr

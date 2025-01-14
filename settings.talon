@@ -85,7 +85,7 @@ settings():
     # Default is 'proportional', which preserves window size : screen size ratio.
     # 'size aware' keeps absolute window size the same, except full-height or
     # -width windows are resized to stay full-height/width.
-    # user.window_snap_screen = "size aware"
+    user.window_snap_screen = "size aware"
 
     # Puts Talon into sleep mode if no commands are spoken for a defined period of time.
     # user.listening_timeout_minutes = 3
@@ -111,4 +111,4 @@ settings():
 # Uncomment the below to enable support for saying numbers without a prefix.
 # By default you need to say "numb one" to write "1". If you uncomment this,
 # you can say "one" to write "1".
-# tag(): user.unprefixed_numbers
+tag(): user.unprefixed_numbers
