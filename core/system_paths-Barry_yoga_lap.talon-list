@@ -9,7 +9,7 @@ documents: C:\Users\Administrator\Documents
 docks: C:\Users\Administrator\Documents
 downloads: C:\Users\Administrator\Downloads
 music: C:\Users\Administrator\Music
-videos
+videos: C:\Users\barry\Videos
 talon home: %appdata%\talon
 talon user: %appdata%\talon\user
 talon community: %appdata%\talon\user\community
