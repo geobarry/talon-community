@@ -9,17 +9,20 @@ list: user.delimiter_pair
 # round: ( )
 # pad: space space
 
-round: ( )
-box: [ ]
-diamond: < >
-curly: { }
-twin: "' '"
-quad: '" "'
-skis: ` `
+parentheses: ( )
+args: ( )
+#box: [ ]
+square brackets: [ ]
+#diamond: < >
+angle brackets: < >
+curly brackets: { }
+feet: "' '"
+inches: '" "'
+back ticks: ` `
 percentages: % %
-pad: space space
+padded: space space
 
-escaped quad: '\\" \\"'
-escaped twin:  "\\' \\'"
-escaped round: \( \)
-escaped box: \[ \]
+escaped inches: '\\" \\"'
+escaped feet:  "\\' \\'"
+escaped parentheses: \( \)
+escaped brackets: \[ \]
