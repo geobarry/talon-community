@@ -39,7 +39,8 @@ e.g.,for example
 GCS,geographic coordinate system
 GEO,geography
 GIScience,geographic information science
-GISci,geo info sci
+GISci,G I Sci
+BIO,biology
 HTML,hypertext markup language
 i.e.,in other words
 ICC,international cartographic conference
@@ -47,6 +48,9 @@ ICA,international cartography association
 img src, image source
 min,minimum
 max,maximum
+MBA,Masters of Business Administration
+MBA
+MBA with GIS Option
 NIH,national institute of health
 NIU,northern Illinois university
 NSF,national science foundation
@@ -487,7 +491,6 @@ rev,revision
 rnd,round
 rb,ruby
 rs,rust
-smbd,samba D
 smb,samba
 sk,saskatchewan
 sched,schedule
