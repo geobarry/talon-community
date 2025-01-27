@@ -15,7 +15,7 @@ phrase <user.text> {user.phrase_ender}:
     insert(phrase_ender)
 <user.formatters> that: user.formatters_reformat_selection(user.formatters)
 {user.word_formatter} <user.word>: user.insert_formatted(word, word_formatter)
-<user.formatters> (pace | paste): user.insert_formatted(clip.text(), formatters)
+#<user.formatters> (pace | paste): user.insert_formatted(clip.text(), formatters)
 recent list: user.toggle_phrase_history()
 recent close: user.phrase_history_hide()
 recent repeat <number_small>:
