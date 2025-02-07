@@ -37,7 +37,7 @@ ctx.lists["self.navigation_target_name"] = navigation_target_names
 
 
 @mod.capture(
-    rule="<user.any_alphanumeric_key> | {user.navigation_target_name} | (abbreviate|abbreviation|brief) {user.abbreviation} | phrase <user.text> | variable {user.variable_list} | function {user.function_list} | word <user.word> | number <user.real_number> | <user.text>"
+    rule="<user.any_alphanumeric_key> | {user.navigation_target_name} | (abbreviate|abbreviation|brief) {user.abbreviation} | phrase <user.text> | variable {user.variable} | function {user.function} | word <user.word> | number <user.real_number> | <user.text>"
 )
 def navigation_target(m) -> re.Pattern:
     """A target to navigate to. Returns a regular expression."""
@@ -48,10 +48,10 @@ def navigation_target(m) -> re.Pattern:
         return re.compile(m.navigation_target_name)
     if hasattr(m,"abbreviation"):
         t = m.abbreviation
-    if hasattr(m,"variable_list"):
-        t = m.variable_list
-    if hasattr(m,"function_list"):
-        t = m.function_list
+    if hasattr(m,"variable"):
+        t = m.variable
+    if hasattr(m,"function"):
+        t = m.function
     if hasattr(m,"real_number"):
         x = int(m.real_number)
         y = float(m.real_number)
