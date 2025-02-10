@@ -2,3 +2,6 @@ list: user.phrase_ender
 -
 
 over: ""
+period: ". "
+comma: ", "
+colon: ": "
