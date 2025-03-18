@@ -180,7 +180,7 @@ symbol_key_words = {
     "paren": "(",
     "parent": "(",
     "right parent": ")",
-    "brace": "{",
+    "curly brace": "{",
     "left brace": "{",
     "curly bracket": "{",
     "left curly bracket": "{",
