@@ -49,10 +49,12 @@ Pictures: %dropbox%\cantaloupe bob\Barry\Pictures
 website: %dropbox%\cantaloupe bob\Barry\website
 travel: %dropbox%\cantaloupe bob\Barry\travel
 CaGIS: %dropbox%\CaGIS
+CaGIS map competition: %dropbox%\CaGIS\awards\Map Design Competition\2024
 personal: %dropbox%\cantaloupe bob\Barry\personal
 New Mexico: %dropbox%\cantaloupe bob\Barry\personal\Travel\2024 New Mexico
 data: %dropbox%\cantaloupe bob\Barry\Data_DB
-mouse free videos: %dropbox%\cantaloupe bob\Barry\Research\Projects\Mouse Free
+mouse free project: %dropbox%\cantaloupe bob\Barry\Research\Projects\Mouse Free
+mouse free demos: %dropbox%\cantaloupe bob\Barry\Research\Projects\Mouse Free\Demos
 dropbox: %dropbox%
 barry: %dropbox%\cantaloupe bob\barry
 cartography reference map videos: %dropbox%\cantaloupe bob\Barry\Teaching\Cartography and Visualization\Labs\Lab 1 Reference Map\videos\2024
