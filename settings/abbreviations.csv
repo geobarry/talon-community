@@ -632,3 +632,6 @@ ft, feet
 mtg,meeting
 LoD,level of detail
 APSC,area preserving segment collapse
+RDP:Ramer Douglas Peucker
+VW:Visvalingam Whyatt
+inf:infinity
