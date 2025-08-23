@@ -553,7 +553,7 @@ temp,temperature
 tmp,temporary
 term,terminal
 txt,text
-hh:mm:ss,time format
+hh,mm,ss,time format
 toctou,time of check time of use
 ttl,time to live
 tok,token
@@ -632,7 +632,8 @@ ft, feet
 mtg,meeting
 LoD,level of detail
 APSC,area preserving segment collapse
-RDP:Ramer Douglas Peucker
-VW:Visvalingam Whyatt
-inf:infinity
-dept:department
+RDP,Ramer Douglas Peucker
+VW,Visvalingam Whyatt
+inf,infinity
+dept,department
+POI,point of interest
