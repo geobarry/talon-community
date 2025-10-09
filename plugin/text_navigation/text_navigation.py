@@ -135,14 +135,13 @@ class Actions:
         """Navigate in `direction` to the occurrence_number-th time that `regex` occurs, then execute `navigation_action` at the given `before_or_after` position."""
         
         direction = direction.upper()
-#        print(f"direction: {direction}")
         navigation_target_name = re.compile(
             navigation_target_names["word"]
             if (navigation_target_name == "DEFAULT")
             else navigation_target_name
         )
         function = navigate_left if direction in ("UP", "LEFT") else navigate_right
-        function(
+        return function(
             navigation_action,
             navigation_target_name,
             before_or_after,
@@ -282,6 +281,7 @@ def navigate_left(
         start,
         end,
     )
+    return match.group()
 
 
 def navigate_right(
@@ -316,7 +316,7 @@ def navigate_right(
         start,
         end,
     )
-
+    return match.group()
 
 def handle_navigation_action(
     navigation_action,
