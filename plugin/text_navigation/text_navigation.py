@@ -133,7 +133,7 @@ class Actions:
         occurrence_number: int,
     ):
         """Navigate in `direction` to the occurrence_number-th time that `regex` occurs, then execute `navigation_action` at the given `before_or_after` position."""
-        
+        print("COMMUNITY NAVIGATION")
         direction = direction.upper()
         navigation_target_name = re.compile(
             navigation_target_names["word"]
