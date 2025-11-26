@@ -5,7 +5,9 @@ phrase <user.text>$:
 phrase <user.text> {user.phrase_ender}:
     user.add_phrase_to_history(text)
     insert("{text}{phrase_ender}")
-{user.prose_formatter} <user.prose>$: user.insert_formatted(prose, prose_formatter)
+{user.prose_formatter} <user.prose>$: 
+	user.insert_formatted(prose, prose_formatter)
+	print(prose_formatter)
 {user.prose_formatter} <user.prose> {user.phrase_ender}:
     user.insert_formatted(prose, prose_formatter)
     insert(phrase_ender)

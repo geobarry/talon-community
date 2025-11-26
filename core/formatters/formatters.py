@@ -480,3 +480,7 @@ class Actions:
         """Insert a list of strings, sequentially."""
         for string in strings:
             actions.insert(string)
+
+    def get_formatters():
+        """Gets formatter objects"""
+        return get_formatters_and_prose_formatters(True)
