@@ -13,14 +13,13 @@ page up: pageup
 pager up: pageup
 escape: escape
 space: space
-jump: tab
+pop: tab
 tab
 insert: insert
 wipe: backspace
 delete: backspace
 forward delete: delete
-flick: delete
-flick right: delete
-flick left: backspace
+cut right: delete
+cut left: backspace
 menu key: menu
 print screen: printscr
