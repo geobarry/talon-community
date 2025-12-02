@@ -13,7 +13,7 @@ page up: pageup
 pager up: pageup
 escape: escape
 space: space
-pop: tab
+skip: tab
 tab
 insert: insert
 wipe: backspace
