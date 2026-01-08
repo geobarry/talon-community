@@ -2,7 +2,6 @@ list: user.letter
 -
 arm: a
 army: a
-angry: a
 blue: b
 cap: c
 drum: d
@@ -23,10 +22,10 @@ orca: o
 poke: p
 quench: q
 rock: r
-sun: s
+slam: s
+slum: s
 trap: t
 urban: u
-urge: u
 urgent: u
 voice: v
 wash: w

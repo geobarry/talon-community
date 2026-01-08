@@ -6,7 +6,7 @@ settings():
     # "main" - main screen as configured in OS
     # "cursor" - screen containing mouse pointer
     # "focus" - screen containing active/focused window/app
-    user.subtitles_screens = "main"
+    user.subtitles_screens = "all"
     # 100 px maximum subtitle font size
     user.subtitles_size = 100
     # White subtitle color
