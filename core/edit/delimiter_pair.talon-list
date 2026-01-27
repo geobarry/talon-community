@@ -16,10 +16,13 @@ square brackets: [ ]
 #diamond: < >
 angle brackets: < >
 curly brackets: { }
+quotes: '" "'
+single quotes: "' '"
 feet: "' '"
 inches: '" "'
 back ticks: ` `
 percentages: % %
+spaces: "   "
 padded: space space
 
 escaped inches: '\\" \\"'
