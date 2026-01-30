@@ -19,7 +19,7 @@ insert: insert
 wipe: backspace
 delete: backspace
 forward delete: delete
-cut right: delete
-cut left: backspace
+flick right: delete
+flick left: backspace
 menu key: menu
 print screen: printscr
