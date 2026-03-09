@@ -13,7 +13,7 @@ touch:
     # Touch automatically ends left drags so this is for right drags specifically
     user.mouse_drag_end()
 
-righty:
+right click:
     # close zoom if open
     tracking.zoom_cancel()
     mouse_click(1)
