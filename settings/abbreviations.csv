@@ -650,3 +650,7 @@ int, interval
 cand, candidate
 GDB,geodatabase
 acad,academic
+VC,voice control
+KM,keyboard and mouse
+KM,keyboard or mouse
+URL,universal resource locator
