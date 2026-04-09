@@ -478,7 +478,7 @@ regex,regular expression
 regex,regular expressions
 rm,remove
 repl,repel
-rsi,repetitive strain injury
+RSI,repetitive strain injury
 repo,repository
 repr,represent
 repr,representation
@@ -654,3 +654,4 @@ VC,voice control
 KM,keyboard and mouse
 KM,keyboard or mouse
 URL,universal resource locator
+TaGIS,talon GIS
