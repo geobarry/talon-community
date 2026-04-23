@@ -1,6 +1,7 @@
-open {user.website}: user.open_url(website)
-open that: user.open_url(edit.selected_text())
-open paste: user.open_url(clip.text())
+# These commands often conflict with "file open", usually will be one-off commands
+^open {user.website}$: user.open_url(website)
+^open that$: user.open_url(edit.selected_text())
+^open paste$: user.open_url(clip.text())
 
 {user.search_engine} hunt <user.text>$:
     user.search_with_search_engine(search_engine, user.text)
