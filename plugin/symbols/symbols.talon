@@ -4,7 +4,7 @@ triple quote: "'''"
 triple grave | triple back tick | gravy: "```"
 (dot dot | dotdot): ".."
 ellipsis: "..."
-(comma and | spamma): ", "
+(comma and | spamma | comgap): ", "
 arrow: "->"
 dub arrow: "=>"
 
