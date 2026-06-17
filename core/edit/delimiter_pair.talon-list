@@ -28,4 +28,5 @@ padded: space space
 escaped inches: '\\" \\"'
 escaped feet:  "\\' \\'"
 escaped parentheses: \( \)
-escaped brackets: \[ \]
+escaped square brackets: \[ \]
+

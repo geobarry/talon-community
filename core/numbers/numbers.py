@@ -1,15 +1,51 @@
 import math
-from typing import Iterator, Union
+from collections.abc import Iterator
+from typing import Union
 
 from talon import Context, Module
 
 mod = Module()
 ctx = Context()
 
-digit_list = "zero one two three four five six seven eight nine".split()
-teens = "ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split()
-tens = "twenty thirty forty fifty sixty seventy eighty ninety".split()
-scales = "hundred thousand million billion trillion quadrillion quintillion sextillion septillion octillion nonillion decillion".split()
+digit_list = [
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+]
+teens = [
+    "ten",
+    "eleven",
+    "twelve",
+    "thirteen",
+    "fourteen",
+    "fifteen",
+    "sixteen",
+    "seventeen",
+    "eighteen",
+    "nineteen",
+]
+tens = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+scales = [
+    "hundred",
+    "thousand",
+    "million",
+    "billion",
+    "trillion",
+    "quadrillion",
+    "quintillion",
+    "sextillion",
+    "septillion",
+    "octillion",
+    "nonillion",
+    "decillion",
+]
 
 digits_map = {n: i for i, n in enumerate(digit_list)}
 digits_map["oh"] = 0
@@ -225,7 +261,6 @@ ctx.lists["user.number_small"] = get_spoken_form_under_one_hundred(
 )
 
 
-# TODO: allow things like "double eight" for 88
 @ctx.capture("digit_string", rule=f"({alt_digits} | {alt_teens} | {alt_tens})+")
 def digit_string(m) -> str:
     return parse_number(list(m))

@@ -2,9 +2,13 @@ new line: "\n"
 double dash: "--"
 triple quote: "'''"
 triple grave | triple back tick | gravy: "```"
-(dot dot | dotdot): ".."
+dot dot | dotdot: ".."
 ellipsis: "..."
+
 (comma and | spamma | comgap): ", "
+
+
+
 arrow: "->"
 dub arrow: "=>"
 

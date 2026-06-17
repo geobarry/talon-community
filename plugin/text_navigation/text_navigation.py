@@ -214,22 +214,22 @@ def get_current_selection_size():
 
 
 def go_right(i):
-    for j in range(0, i):
+    for _ in range(0, i):
         actions.edit.right()
 
 
 def go_left(i):
-    for j in range(0, i):
+    for _ in range(0, i):
         actions.edit.left()
 
 
 def extend_left(i):
-    for j in range(0, i):
+    for _ in range(0, i):
         actions.edit.extend_left()
 
 
 def extend_right(i):
-    for j in range(0, i):
+    for _ in range(0, i):
         actions.edit.extend_right()
 
 

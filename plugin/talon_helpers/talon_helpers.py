@@ -29,17 +29,11 @@ class Actions:
         executable = os.path.basename(actions.app.executable())
         app_name = create_name(friendly_name.removesuffix(".exe"))
         if app.platform == "mac":
-            result = 'mod.apps.{} = """\nos: mac\nand app.bundle: {}\n"""'.format(
-                app_name, actions.app.bundle()
-            )
+            result = f'mod.apps.{app_name} = """\nos: mac\nand app.bundle: {actions.app.bundle()}\n"""'
         elif app.platform == "windows":
-            result = 'mod.apps.{} = r"""\nos: windows\nand app.name: {}\nos: windows\nand app.exe: /^{}$/i\n"""'.format(
-                app_name, friendly_name, re.escape(executable.lower())
-            )
+            result = f'mod.apps.{app_name} = r"""\nos: windows\nand app.name: {friendly_name}\nos: windows\nand app.exe: /^{re.escape(executable.lower())}$/i\n"""'
         else:
-            result = 'mod.apps.{} = """\nos: {}\nand app.name: {}\n"""'.format(
-                app_name, app.platform, friendly_name
-            )
+            result = f'mod.apps.{app_name} = """\nos: {app.platform}\nand app.name: {friendly_name}\n"""'
 
         clip.set_text(result)
 
@@ -51,9 +45,7 @@ class Actions:
         if app.platform == "mac":
             result = f"os: mac\nand app.bundle: {actions.app.bundle()}\n"
         elif app.platform == "windows":
-            result = "os: windows\nand app.name: {}\nos: windows\nand app.exe: /^{}$/i\n".format(
-                friendly_name, re.escape(executable.lower())
-            )
+            result = f"os: windows\nand app.name: {friendly_name}\nos: windows\nand app.exe: /^{re.escape(executable.lower())}$/i\n"
         else:
             result = f"os: {app.platform}\nand app.name: {friendly_name}\n"
 
@@ -61,7 +53,7 @@ class Actions:
 
     def talon_sim_phrase(phrase: Union[str, Phrase]):
         """Sims the phrase in the active app and dumps to the log"""
-        print("**** Simulated Phrse **** ")
+        print("**** Simulated Phrase **** ")
         print(speech_system._sim(str(phrase)))
         print("*************************")
 
@@ -139,6 +131,10 @@ class Actions:
         result += "\nBundle: " + actions.app.bundle()
         result += "\nTitle: " + actions.win.title()
         return result
+
+    def talon_get_active_window_class_name() -> str:
+        """Returns the class name of the active window"""
+        return ui.active_window().cls
 
     def talon_version_info() -> str:
         """Returns talon & operation system verison information"""
