@@ -37,6 +37,7 @@ context_command_map = {}
 # rule word -> Set[(context name, rule)]
 rule_word_map: dict[str, set[tuple[str, str]]] = defaultdict(set)
 search_phrase = None
+show_list_values = True
 
 # context name -> actual context
 context_map = {}
@@ -453,6 +454,7 @@ def reset():
     global display_name_to_context_name_map
     global selected_list
     global current_list_page
+    global search_phrase
 
     current_context_page = 1
     sorted_display_list = []
@@ -463,6 +465,7 @@ def reset():
     display_name_to_context_name_map = {}
     selected_list = None
     current_list_page = 1
+    search_phrase = None
 
 
 def update_active_contexts_cache(active_contexts):
@@ -597,6 +600,23 @@ def refresh_rule_word_map(context_command_map):
                 rule_word_map[token].add((context_name, rule))
 
     return rule_word_map
+
+
+# --- Create function expand_word_groups() to facilitate matching homophones ---
+def expand_word_groups(phrase: str):
+    """Returns a list of homophone groups, where each group is a list of homophone words"""
+    if not phrase:
+        return []
+    words = phrase.lower().split()
+    return [rule_word_map.get(w, [w]) for w in words]
+
+# --- Create function matches_all_groups() to facilitate matching different word orders ---
+def matches_all_groups(text: str, groups):
+    text = text.lower()
+    for group in groups:
+        if not any(g in text for g in group):
+            return False
+    return True
 
 
 events_registered = False
