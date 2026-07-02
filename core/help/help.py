@@ -602,7 +602,6 @@ def refresh_rule_word_map(context_command_map):
     return rule_word_map
 
 
-# --- Create function expand_word_groups() to facilitate matching homophones ---
 def expand_word_groups(phrase: str):
     """Returns a list of homophone groups, where each group is a list of homophone words"""
     if not phrase:
@@ -610,8 +609,9 @@ def expand_word_groups(phrase: str):
     words = phrase.lower().split()
     return [rule_word_map.get(w, [w]) for w in words]
 
-# --- Create function matches_all_groups() to facilitate matching different word orders ---
+
 def matches_all_groups(text: str, groups):
+    """Returns true if input text includes at least one word in each homophone group in groups"""
     text = text.lower()
     for group in groups:
         if not any(g in text for g in group):
@@ -692,9 +692,24 @@ def gui_list_help(gui: imgui.GUI):
     gui.line()
 
     if len(pages_list) > 0:
-        for key, value in pages_list[current_list_page - 1].items():
-            gui.text(f"{value}: {key}")
+        groups = expand_word_groups(search_phrase) # 
 
+        for key, value in pages_list[current_list_page - 1].items():
+            text_key = key.lower()
+            text_val = value.lower()
+
+            # If a search phrase exists, only include entries with match for every word group
+            if groups:
+                if not (matches_all_groups(text_key, groups) or
+                        matches_all_groups(text_val, groups)):
+                    continue
+            
+            # Display the entry
+            if show_list_values:
+                gui.text(f"{value}: {key}")
+            else:
+                gui.text(f"{key}")
+            
     gui.spacer()
 
     if total_page_count > 1:
@@ -716,19 +731,21 @@ def gui_list_help(gui: imgui.GUI):
 
 @mod.action_class
 class Actions:
-    def help_list(ab: str):
+    def help_list(ab: str, phrase: str = None, show_values: bool = True):
         """Provides the symbol dictionary"""
-        # what you say is stored as a trigger
-        global selected_list
+        # what you say is stored as globals used when help UI is triggered
+        global selected_list, search_phrase, show_list_values
         reset()
         selected_list = ab
+        search_phrase = phrase
+        show_list_values = show_values
         gui_list_help.show()
         register_events(True)
         ctx.tags = ["user.help_open"]
 
     def help_formatters(ab: dict, reformat: bool):
         """Provides the list of formatter keywords"""
-        # what you say is stored as a trigger
+        # what you say is stored as globals used when help UI is triggered
         global formatters_words, formatters_reformat
         formatters_words = ab
         formatters_reformat = reformat
