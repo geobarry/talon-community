@@ -37,7 +37,6 @@ context_command_map = {}
 # rule word -> Set[(context name, rule)]
 rule_word_map: dict[str, set[tuple[str, str]]] = defaultdict(set)
 search_phrase = None
-show_list_values = True
 
 # context name -> actual context
 context_map = {}
@@ -59,6 +58,8 @@ show_enabled_contexts_only = False
 
 selected_list = None
 current_list_page = 1
+reverse_list_key_value = False
+omit_list_value = False
 
 
 def update_title():
@@ -454,6 +455,8 @@ def reset():
     global display_name_to_context_name_map
     global selected_list
     global current_list_page
+    global reverse_list_key_value
+    global omit_list_value
     global search_phrase
 
     current_context_page = 1
@@ -465,6 +468,8 @@ def reset():
     display_name_to_context_name_map = {}
     selected_list = None
     current_list_page = 1
+    reverse_list_key_value = False
+    omit_list_value = False
     search_phrase = None
 
 
@@ -607,7 +612,7 @@ def expand_word_groups(phrase: str):
     if not phrase:
         return []
     words = phrase.lower().split()
-    return [rule_word_map.get(w, [w]) for w in words]
+    return [actions.user.homophones_get(w) or [w] for w in words]
 
 
 def matches_all_groups(text: str, groups):
@@ -617,6 +622,7 @@ def matches_all_groups(text: str, groups):
         if not any(g in text for g in group):
             return False
     return True
+
 
 
 events_registered = False
@@ -672,6 +678,7 @@ def gui_list_help(gui: imgui.GUI):
     global total_page_count
     global current_list_page
     global selected_list
+    global reverse_list_key_value
 
     pages_list = draw_list_commands(gui)
     total_page_count = len(pages_list)
@@ -695,20 +702,21 @@ def gui_list_help(gui: imgui.GUI):
         groups = expand_word_groups(search_phrase) # 
 
         for key, value in pages_list[current_list_page - 1].items():
-            text_key = key.lower()
-            text_val = value.lower()
+            text_key = key.lower().strip()
+            text_val = value.lower().strip()
 
             # If a search phrase exists, only include entries with match for every word group
             if groups:
-                if not (matches_all_groups(text_key, groups) or
-                        matches_all_groups(text_val, groups)):
+                if not matches_all_groups(text_key, groups): 
                     continue
             
             # Display the entry
-            if show_list_values:
+            if omit_list_value or text_key == text_val:
+                gui.text(f"{key}")
+            elif reverse_list_key_value:
                 gui.text(f"{value}: {key}")
             else:
-                gui.text(f"{key}")
+                gui.text(f"{key}: {value}")
             
     gui.spacer()
 
@@ -731,14 +739,16 @@ def gui_list_help(gui: imgui.GUI):
 
 @mod.action_class
 class Actions:
-    def help_list(ab: str, phrase: str = None, show_values: bool = True):
+    def help_list(ab: str, reverse: bool = False, omit_value: bool = False, phrase: str = None):
         """Provides the symbol dictionary"""
         # what you say is stored as globals used when help UI is triggered
-        global selected_list, search_phrase, show_list_values
+        global selected_list, search_phrase, reverse_list_key_value, omit_list_value
+        print(f"phrase: {type(phrase)}") 
         reset()
         selected_list = ab
         search_phrase = phrase
-        show_list_values = show_values
+        reverse_list_key_value = reverse
+        omit_list_value = omit_value
         gui_list_help.show()
         register_events(True)
         ctx.tags = ["user.help_open"]
