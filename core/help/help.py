@@ -650,8 +650,15 @@ def hide_all_help_guis():
 
 def paginate_list(data, SIZE=None):
     chunk_size = SIZE or settings.get("user.help_max_command_lines_per_page")
-    it = iter(data)
-    for _ in range(0, len(data), chunk_size):
+    global search_phrase
+    if search_phrase:
+        filtered_keys = [k for k in data if search_phrase in k.lower()]
+        data_sz = len(filtered_keys)
+        it = iter(filtered_keys)
+    else:
+        data_sz = len(data)
+        it = iter(data)
+    for _ in range(0, data_sz, chunk_size):
         yield {k: data[k] for k in islice(it, chunk_size)}
 
 
