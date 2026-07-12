@@ -329,10 +329,18 @@ def gui_context_help(gui: imgui.GUI):
 
     # if there's a selected context, draw the commands for it
     else:
-        if selected_context is not None:
+        # if selected_context is not None:
+            # draw_context_commands(gui)
+        # elif search_phrase is not None:
+            # draw_search_commands(gui)
+
+        if selected_context is not None and search_phrase is not None:
+            draw_filtered_context_commands(gui)
+        elif selected_context is not None:
             draw_context_commands(gui)
         elif search_phrase is not None:
             draw_search_commands(gui)
+
 
         gui.spacer()
         if total_page_count > 1:
@@ -404,6 +412,51 @@ def draw_search_commands(gui: imgui.GUI):
             gui.line()
             draw_commands(gui, commands)
             gui.spacer()
+
+
+def draw_filtered_context_commands(gui: imgui.GUI):
+    global selected_context
+    global search_phrase
+    global total_page_count
+    global selected_context_page
+
+    context_title = format_context_title(selected_context)
+    title = f"Context: {context_title} (filtered)"
+    draw_commands_title(gui, title)
+
+    # --- Handle None or empty search phrase without touching get_search_commands ---
+    if not search_phrase:
+        # No filtering → behave exactly like draw_context_commands
+        all_commands = list(context_command_map[selected_context].items())
+
+        item_line_counts = [get_command_line_count(cmd) for cmd in all_commands]
+        pages = get_pages(item_line_counts)
+        total_page_count = max(pages, default=1)
+
+        page_commands = [
+            cmd
+            for cmd, page in zip(all_commands, pages, strict=False)
+            if page == selected_context_page
+        ]
+
+        draw_commands(gui, page_commands)
+        return
+
+    # --- Normal filtered behavior when search_phrase is valid ---
+    search_results = get_search_commands(search_phrase)
+    filtered_commands = search_results.get(selected_context, [])
+
+    item_line_counts = [get_command_line_count(cmd) for cmd in filtered_commands]
+    pages = get_pages(item_line_counts)
+    total_page_count = max(pages, default=1)
+
+    page_commands = [
+        cmd
+        for cmd, page in zip(filtered_commands, pages, strict=False)
+        if page == selected_context_page
+    ]
+
+    draw_commands(gui, page_commands)
 
 
 def get_search_commands(phrase: str) -> dict[str, tuple[str, str]]:
@@ -828,6 +881,50 @@ class Actions:
         gui_context_help.show()
         register_events(True)
         ctx.tags = ["user.help_open"]
+
+    def help_search_context(
+        phrase: Optional[str] = None,
+        context: Optional[str] = None,
+        enabled_only: bool = False
+    ):
+        """
+        Display command info for:
+          - a search phrase only
+          - a context only
+          - both a search phrase AND a context
+        """
+
+        print(f"context: {context}")
+
+        global search_phrase
+        global selected_context, selected_context_page
+
+        reset()
+
+        # --- Handle search phrase ---
+        if phrase:
+            search_phrase = phrase
+        else:
+            search_phrase = None
+
+        # Refresh command map (same behavior as help_search)
+        refresh_context_command_map(enabled_only=enabled_only)
+
+        # --- Handle context selection ---
+        if context:
+            selected_context = context
+            selected_context_page = 1
+            update_active_contexts_cache(registry.last_active_contexts)
+
+        # --- GUI selection logic ---
+        hide_all_help_guis()
+
+        # Show context help
+        gui_context_help.show()
+
+        register_events(True)
+        ctx.tags = ["user.help_open"]
+
 
     def help_next():
         """Navigates to next page"""
