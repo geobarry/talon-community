@@ -13,10 +13,10 @@ settings():
     user.file_manager_auto_show_pickers = false
 
     # Set the number of command lines to display per help page
-    user.help_max_command_lines_per_page = 50
+    user.help_max_command_lines_per_page = 33
 
     # Set the number of contexts to display per help page
-    user.help_max_contexts_per_page = 20
+    user.help_max_contexts_per_page = 30
 
     # Uncomment to always sort help contexts alphabetically.
     # user.help_sort_contexts_by_specificity = false

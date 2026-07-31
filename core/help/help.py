@@ -56,6 +56,7 @@ cached_active_contexts = set()
 
 live_update = True
 show_enabled_contexts_only = False
+show_command_script_code = True
 
 selected_list = None
 current_list_page = 1
@@ -229,6 +230,9 @@ def get_current_context_page_length() -> int:
 
 def get_command_line_count(command: tuple[str, str]) -> int:
     """This should be kept in sync with draw_commands"""
+    global show_command_script_code
+    if not show_command_script_code:
+        return 1
     _, body = command
     lines = len(body.split("\n"))
     if lines == 1:
@@ -279,6 +283,7 @@ def gui_context_help(gui: imgui.GUI):
     global cached_active_contexts
     global total_page_count
     global command_search_phrase
+    global show_command_script_code
 
     # if no selected context, draw the contexts
     if selected_context is None and command_search_phrase is None:
@@ -354,6 +359,13 @@ def gui_context_help(gui: imgui.GUI):
         if gui.button("Help return"):
             actions.user.help_return()
 
+    if show_command_script_code:
+        if gui.button("Help hide details"):
+            actions.user.help_hide_details()
+    else:
+        if gui.button("Help show details"):
+            actions.user.help_show_details()
+
     if gui.button("Help refresh"):
         actions.user.help_refresh()
 
@@ -390,7 +402,7 @@ def draw_search_commands(gui: imgui.GUI):
     global selected_context_page
 
     title = f"Search: {command_search_phrase}"
-    commands_grouped = get_search_commands(command_search_phrase)
+    commands_grouped = get_search_commands()
 
     sorted_commands_grouped = sorted(
         commands_grouped.items(),
@@ -421,30 +433,18 @@ def draw_filtered_context_commands(gui: imgui.GUI):
     global total_page_count
     global selected_context_page
 
+    # Absence of command search phrase means show all commands
+    # On the other hand, command_search_phrase = "" will show no results
+    if command_search_phrase is None:
+        draw_context_commands(gui)
+        return
+
     context_title = format_context_title(selected_context)
     title = f"Context: {context_title} (filtered)"
     draw_commands_title(gui, title)
 
-    # --- Handle None or empty search phrase without touching get_search_commands ---
-    if not command_search_phrase:
-        # No filtering → behave exactly like draw_context_commands
-        all_commands = list(context_command_map[selected_context].items())
-
-        item_line_counts = [get_command_line_count(cmd) for cmd in all_commands]
-        pages = get_pages(item_line_counts)
-        total_page_count = max(pages, default=1)
-
-        page_commands = [
-            cmd
-            for cmd, page in zip(all_commands, pages, strict=False)
-            if page == selected_context_page
-        ]
-
-        draw_commands(gui, page_commands)
-        return
-
     # --- Normal filtered behavior when command_search_phrase is valid ---
-    search_results = get_search_commands(command_search_phrase)
+    search_results = get_search_commands()
     filtered_commands = search_results.get(selected_context, [])
 
     item_line_counts = [get_command_line_count(cmd) for cmd in filtered_commands]
@@ -460,8 +460,10 @@ def draw_filtered_context_commands(gui: imgui.GUI):
     draw_commands(gui, page_commands)
 
 
-def get_search_commands(phrase: str) -> dict[str, tuple[str, str]]:
+def get_search_commands() -> dict[str, tuple[str, str]]:
     global rule_word_map
+    # module-level variables command_search_phrase, rule_word_map
+    # note we are inconsistent about defining them as global when they are used as read only
     tokens = command_search_phrase.split(" ")
 
     viable_commands = rule_word_map[tokens[0]]
@@ -489,7 +491,11 @@ def draw_commands_title(gui: imgui.GUI, title: str):
 
 
 def draw_commands(gui: imgui.GUI, commands: Iterable[tuple[str, str]]):
+    global show_command_script_code
     for key, val in commands:
+        if not show_command_script_code:
+            gui.text(key)
+            continue
         val = val.split("\n")
         if len(val) > 1:
             gui.text(f"{key}:")
@@ -513,6 +519,7 @@ def reset():
     global omit_list_value
     global command_search_phrase
     global list_search_phrase
+    global show_command_script_code
 
     current_context_page = 1
     sorted_display_list = []
@@ -527,6 +534,7 @@ def reset():
     omit_list_value = False
     command_search_phrase = None
     list_search_phrase = None
+    show_command_script_code = True
 
 
 def update_active_contexts_cache(active_contexts):
@@ -742,6 +750,7 @@ def gui_list_help(gui: imgui.GUI):
     global current_list_page
     global selected_list
     global reverse_list_key_value
+    global omit_list_value    
 
     pages_list = draw_list_commands(gui)
     total_page_count = len(pages_list)
@@ -790,6 +799,22 @@ def gui_list_help(gui: imgui.GUI):
         if gui.button("Help previous"):
             actions.user.help_previous()
 
+    if omit_list_value:
+        if gui.button("Help show details"):
+            actions.user.help_show_details()
+    else:
+        if gui.button("Help hide details"):
+            actions.user.help_hide_details()
+
+    if not omit_list_value:
+        if reverse_list_key_value:
+            if gui.button("Help key first"):
+                actions.user.help_key_first()
+        else:
+            if gui.button("Help value first"):
+                actions.user.help_value_first()
+
+    if total_page_count > 1 or list_search_phrase is not None:
         if gui.button("Help return"):
             actions.user.help_return()
 
@@ -837,29 +862,37 @@ class Actions:
         register_events(True)
         ctx.tags = ["user.help_open"]
 
-    def help_context_enabled():
+    def help_context_enabled(show_code: bool = True):
         """Display contextual command info"""
+        global show_command_script_code
+        
         reset()
+        show_command_script_code = show_code
         refresh_context_command_map(enabled_only=True)
         hide_all_help_guis()
         gui_context_help.show()
         register_events(True)
         ctx.tags = ["user.help_open"]
 
-    def help_context():
+    def help_context(show_code: bool = True):
         """Display contextual command info"""
+        global show_command_script_code
+        
         reset()
+        show_command_script_code = show_code
         refresh_context_command_map()
         hide_all_help_guis()
         gui_context_help.show()
         register_events(True)
         ctx.tags = ["user.help_open"]
 
-    def help_search(phrase: str, enabled_only: Optional[bool] = False):
+    def help_search(phrase: str, enabled_only: Optional[bool] = False, show_code: Optional[bool] = True):
         """Display command info for search phrase"""
         global command_search_phrase
+        global show_command_script_code
 
         reset()
+        show_command_script_code = show_code
         command_search_phrase = phrase
         refresh_context_command_map(enabled_only=enabled_only)
         hide_all_help_guis()
@@ -867,11 +900,12 @@ class Actions:
         register_events(True)
         ctx.tags = ["user.help_open"]
 
-    def help_selected_context(m: str):
+    def help_selected_context(m: str, show_code: bool = True):
         """Display command info for selected context"""
         global selected_context
         global selected_context_page
-
+        global show_command_script_code
+        print(f'm: {m}')
         if not gui_context_help.showing:
             reset()
             refresh_context_command_map()
@@ -879,51 +913,12 @@ class Actions:
             selected_context_page = 1
             update_active_contexts_cache(registry.last_active_contexts)
 
+        show_command_script_code = show_code
         selected_context = m
         hide_all_help_guis()
         gui_context_help.show()
         register_events(True)
         ctx.tags = ["user.help_open"]
-
-    def help_search_context(context: str = None, phrase: str = None, enabled_only: bool = False):
-        """
-        Display command info for:
-          - a search phrase only
-          - a context only
-          - both a search phrase AND a context
-        """
-
-        print(f"context: {context}")
-
-        global command_search_phrase
-        global selected_context, selected_context_page
-
-        reset()
-
-        # --- Handle search phrase ---
-        if phrase:
-            command_search_phrase = phrase
-        else:
-            command_search_phrase = None
-
-        # Refresh command map (same behavior as help_search)
-        refresh_context_command_map(enabled_only=enabled_only)
-
-        # --- Handle context selection ---
-        if context:
-            selected_context = context
-            selected_context_page = 1
-            update_active_contexts_cache(registry.last_active_contexts)
-
-        # --- GUI selection logic ---
-        hide_all_help_guis()
-
-        # Show context help
-        gui_context_help.show()
-
-        register_events(True)
-        ctx.tags = ["user.help_open"]
-
 
     def help_next():
         """Navigates to next page"""
@@ -999,16 +994,51 @@ class Actions:
             else:
                 current_list_page = 1
 
+    def help_show_details():
+        """Shows spoken command + script"""
+        global show_command_script_code
+        global selected_context_page
+        global omit_list_value
+        show_command_script_code = True
+        selected_context_page = 1
+        omit_list_value = False
+
+    def help_hide_details():
+        """Shows spoken command only"""
+        global show_command_script_code
+        global selected_context_page
+        global omit_list_value
+        show_command_script_code = False
+        user.help_max_contexts_per_page = 30
+        omit_list_value = True
+
+    def help_key_first():
+        """Shows key:value order for lists"""
+        global reverse_list_key_value
+        reverse_list_key_value = False
+
+    def help_value_first():
+        """Shows value:key order for lists"""
+        global reverse_list_key_value
+        reverse_list_key_value = True
+
     def help_return():
         """Returns to the main help window"""
         global selected_context
         global selected_context_page
         global show_enabled_contexts_only
+        global command_search_phrase
+        global list_search_phrase
+        global current_list_page
 
         if gui_context_help.showing:
             refresh_context_command_map(show_enabled_contexts_only)
             selected_context_page = 1
             selected_context = None
+            command_search_phrase = None
+        elif gui_list_help.showing:
+            list_search_phrase = None
+            current_list_page = 1
 
     def help_refresh():
         """Refreshes the help"""
