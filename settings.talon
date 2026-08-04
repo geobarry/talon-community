@@ -21,6 +21,9 @@ settings():
     # Uncomment to always sort help contexts alphabetically.
     # user.help_sort_contexts_by_specificity = false
 
+	# If true help imgui navigation/display option commands will show as mouse-clickable buttons
+	user.help_show_buttons_by_default = false
+
     # Set the scroll amount for continuous scroll
     user.mouse_continuous_scroll_amount = 8
 
@@ -131,7 +134,7 @@ settings():
 # By default you need to say "numb one" to write "1". If you uncomment this,
 # you can say "one" to write "1".
 
-tag(): user.unprefixed_numbers
+# tag(): user.unprefixed_numbers
 
 # Uncomment the below to enable the experimental window layout commands
 # defined in window_layout.talon

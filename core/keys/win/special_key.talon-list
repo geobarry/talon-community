@@ -16,7 +16,6 @@ space: space
 skip: tab
 tab
 insert: insert
-wipe: backspace
 delete: backspace
 forward delete: delete
 flick right: delete
