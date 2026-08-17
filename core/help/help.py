@@ -386,10 +386,11 @@ def gui_context_help(gui: imgui.GUI):
                 option_list += ["hide details"]
             else:
                 option_list += ["show details"]
-        option_list += ["show buttons", "close"]
+        option_list += ["close"]
         msg = f"Help ({" | ".join(option_list)})"
         gui.text(msg)
-
+        if gui.button("Help show buttons"):
+            actions.user.help_show_buttons()
 def draw_context_commands(gui: imgui.GUI):
     global selected_context
     global total_page_count
