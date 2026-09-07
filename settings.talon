@@ -101,13 +101,13 @@ settings():
     # Default is 'proportional', which preserves window size : screen size ratio.
     # 'size aware' keeps absolute window size the same, except full-height or
     # -width windows are resized to stay full-height/width.
-    user.window_snap_screen = "size aware"
+    user.window_snap_screen = "proportional"
 
     # Mode enabled on Talon launch (command by default; dictation or sleep are other options)
     # user.initial_mode = "sleep"
 
     # Puts Talon into sleep mode if no commands are spoken for a defined period of time.
-    # user.listening_timeout_minutes = 3
+    user.listening_timeout_minutes = 3
 
     # Time in seconds to wait for the clipboard to change when trying to get selected text
     # user.selected_text_timeout = 0.25
