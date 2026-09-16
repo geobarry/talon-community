@@ -20,4 +20,5 @@ settings():
     # 3 seconds is the maximum time to display a subtitle
     user.subtitles_timeout_max = 3000
     # Position subtitles at the bottom of the screen (93% from top)
-    user.subtitles_y = 0.93
+    user.subtitles_y = 0.75
+	
