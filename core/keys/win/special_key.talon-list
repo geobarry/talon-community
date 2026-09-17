@@ -16,9 +16,10 @@ space: space
 skip: tab
 tab
 insert: insert
-delete: backspace
-forward delete: delete
+#delete: backspace
+#forward delete: delete
 flick right: delete
 flick left: backspace
+context menu: menu
 menu key: menu
 print screen: printscr

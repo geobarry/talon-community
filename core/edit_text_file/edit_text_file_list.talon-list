@@ -14,6 +14,7 @@ unix utilities: tags/terminal/unix_utility.talon-list
 
 abbreviations: settings/abbreviations.csv
 file extensions: settings/file_extensions.csv
+symbols: settings/symbols.csv
 words to replace: settings/words_to_replace.csv
 
 special keys: core/keys/win/special_key.talon-list
