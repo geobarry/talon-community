@@ -4,7 +4,7 @@ Symbol,Mode (command/dictation/both),Spoken Forms (separated with commas)
 .,both,period,full stop
 .,command,dot,point
 ;,both,semicolon
-;,command,semi
+;,command,semicolon
 :,both,colon
 ?,both,question mark
 ?,command,question
@@ -17,7 +17,7 @@ Symbol,Mode (command/dictation/both),Spoken Forms (separated with commas)
 %,both,percent sign
 %,command,percent
 @,both,at symbol,at sign
-°,both,degree sign
+°,both,degree sign,degree symbol
 °,command,degree,degrees
 &,both,ampersand,and sign
 &,command,amper
@@ -36,7 +36,7 @@ _,command,underscore
 /,both,forward slash
 /,command,slash
 \,command,backslash
-{,command,brace,left brace,curly bracket,left curly bracket
+{,command,left brace,curly bracket,left curly bracket
 },command,right brace,right curly bracket
 <,command,angle,left angle,less than
 >,command,right angle,greater than

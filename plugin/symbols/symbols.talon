@@ -1,11 +1,11 @@
 new line: "\n"
 double dash: "--"
 triple quote: "'''"
-triple grave | triple back tick | gravy: "```"
+triple back tick: "```"
 dot dot | dotdot: ".."
 ellipsis: "..."
 
-(comma and | spamma | comgap): ", "
+(comma and | spamma | comma gap): ", "
 
 
 

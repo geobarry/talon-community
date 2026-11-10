@@ -185,6 +185,7 @@ class Actions:
         count = modifier.count
 
         cb = actions.user.get_compound_edit_action_modifier_callback(key)
+        print(f"cb: {cb}")
         if cb:
             # Custom callbacks take three parameters, compound callbacks do not.
             if signature(cb).parameters.get("count"):
