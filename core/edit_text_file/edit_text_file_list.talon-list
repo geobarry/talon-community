@@ -17,8 +17,10 @@ file extensions: settings/file_extensions.csv
 symbols: settings/symbols.csv
 words to replace: settings/words_to_replace.csv
 
+# from my old version
 special keys: core/keys/win/special_key.talon-list
 modifier keys: core/keys/win/modifier_key.talon-list
+microphones to exclude: settings/microphones_to_exclude.csv
 
 contacts json: private/contacts.json
 contacts csv: private/contacts.csv

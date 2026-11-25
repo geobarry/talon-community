@@ -2,7 +2,7 @@ Symbol,Mode (command/dictation/both),Spoken Forms (separated with commas)
 `,both,back tick
 ",",both,comma,coma
 .,both,period,full stop
-.,command,dot,point
+.,command,point
 ;,both,semicolon
 ;,command,semicolon
 :,both,colon
@@ -22,7 +22,7 @@ Symbol,Mode (command/dictation/both),Spoken Forms (separated with commas)
 &,both,ampersand,and sign
 &,command,amper
 -,both,hyphen
--,command,minus,dash
+-,command,minus sign
 –,both,en dash,nut dash
 —,both,em dash,mutton dash
 =,command,equals
